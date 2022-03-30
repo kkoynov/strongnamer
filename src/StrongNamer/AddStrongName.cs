@@ -33,6 +33,8 @@ namespace StrongNamer
         [Required]
         public ITaskItem KeyFile { get; set; }
 
+        public bool DelaySign {get;  set; }
+
         public override bool Execute()
         {
             if (Assemblies == null || Assemblies.Length == 0)
@@ -189,10 +191,18 @@ namespace StrongNamer
                 Log.LogMessage(MessageImportance.Low, $"Writing signed assembly to {assemblyOutputPath}");
                 try
                 {
-                    assembly.Write(assemblyOutputPath, new WriterParameters()
-                    {                        
-                        StrongNameKeyBlob = keyBytes
-                    });
+                    if (DelaySign)
+                    {
+                        assembly.Write(assemblyOutputPath);
+                        base.Log.LogMessage(MessageImportance.Normal, string.Concat("Delay-signing assembly ", assemblyOutputPath), Array.Empty<object>());
+                    }
+                    else
+                    {
+                        assembly.Write(assemblyOutputPath, new WriterParameters()
+                        {                        
+                            StrongNameKeyBlob = keyBytes
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -31,7 +31,8 @@
           Assemblies="@(ReferencePath)"
           CopyLocalFiles="@(ReferenceCopyLocalPaths)"
           SignedAssemblyFolder="$(IntermediateOutputPath)SignedAssemblies"
-          KeyFile="$(StrongNamerKeyFile)">
+          KeyFile="$(StrongNamerKeyFile)"
+		  DelaySign="$(StrongNamerDelaySign)">
 
       <Output TaskParameter="SignedAssembliesToReference" ItemName="AssembliesToReference" />
       <Output TaskParameter="NewCopyLocalFiles" ItemName="NewCopyLocalFiles" />

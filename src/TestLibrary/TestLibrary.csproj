@@ -1,8 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-    <SignAssembly>true</SignAssembly>
+	  
+    <!--Needed to enable signing-->
+	<SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SharedKey.snk</AssemblyOriginatorKeyFile>
+	<!--Needed to enable signing-->
+
+	<!--Needed for delay signing-->
+	<StrongNamerDelaySign>true</StrongNamerDelaySign>
+	<DelaySign>true</DelaySign>
+	<!--Needed for delay signing-->
   </PropertyGroup>
   
   <ItemGroup>
